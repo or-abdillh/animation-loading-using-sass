@@ -1,0 +1,78 @@
+/* 
+Make loading Animation
+With SASS 
+Follow me on Instagram @or_abdillh
+ */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: #EEE;
+  font-size: 24px;
+}
+
+@mixin transY ($px){
+  transform: translateY($px);
+}
+
+@mixin loader ($start, $delay){
+  $max: $start + 40px;
+  
+  @include transY($start);
+  
+  @keyframes loader {
+    from {
+      @include transY($start);
+    } 10% {
+      @include transY($start + 10px);
+    } 20% {
+      @include transY($start + 20px);
+    } 30% {
+      @include transY($start + 30px);
+    } 40% {
+      @include transY($start + 40px);
+    } 50% {
+      @include transY($max - 10px);
+    } 60% {
+      @include transY($max - 20px);
+    } 70% {
+      @include transY($max - 30px);
+    } 80% {
+      @include transY($max - 40px);
+    } to {
+      @include transY(0);
+    }
+  }
+  
+  animation: loader 1s $delay cubic-bezier(.32,.02,.68,1.01) infinite;
+}
+
+
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  
+  span {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-image: linear-gradient(
+    to bottom, #41D3DD, #C0CDCE
+    );
+    margin: .5rem;
+    
+    &:first-child {
+      @include loader(20px, .1s);
+    }
+    &:nth-child(2) {
+      @include loader(30px, .3s);
+    }
+    &:last-child {
+      @include loader(40px, .5s);
+    }
+  }
+}
